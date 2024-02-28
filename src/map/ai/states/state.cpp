@@ -72,16 +72,6 @@ void CState::SetTarget(uint16 _targid)
     }
 }
 
-bool CState::HasErrorMsg() const
-{
-    return m_errorMsg != nullptr;
-}
-
-CBasicPacket* CState::GetErrorMsg()
-{
-    return m_errorMsg.release();
-}
-
 bool CState::DoUpdate(time_point tick)
 {
     UpdateTarget(m_targid);

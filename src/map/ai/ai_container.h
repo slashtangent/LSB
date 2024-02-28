@@ -134,13 +134,16 @@ public:
 protected:
     // input controller
     std::unique_ptr<CController> Controller;
+
     // current synchronized server time (before AI loop execution)
     time_point m_Tick;
     time_point m_PrevTick;
+
     // entity who holds this AI
     CBaseEntity* PEntity;
 
     void CheckCompletedStates();
+
     template <typename T, typename... Args>
     bool ChangeState(Args&&... args)
     {
@@ -158,13 +161,14 @@ protected:
                 m_stateStack.emplace(std::make_unique<T>(std::forward<Args>(args)...));
                 return true;
             }
-            catch (CStateInitException& e)
+            catch (CStateInitException&)
             {
-                PEntity->HandleErrorMessage(e.packet);
+                // PEntity->HandleErrorMessage(e.packet);
             }
         }
         return false;
     }
+
     template <typename T, typename... Args>
     bool ForceChangeState(Args&&... args)
     {
@@ -180,9 +184,9 @@ protected:
             m_stateStack.emplace(std::make_unique<T>(std::forward<Args>(args)...));
             return true;
         }
-        catch (CStateInitException& e)
+        catch (CStateInitException&)
         {
-            PEntity->HandleErrorMessage(e.packet);
+            // PEntity->HandleErrorMessage(e.packet);
         }
         return false;
     }
