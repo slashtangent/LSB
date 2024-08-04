@@ -1,10 +1,15 @@
 -----------------------------------
 -- Zone: The Eldieme Necropolis (195)
 -----------------------------------
+local eldiemeID = zones[xi.zone.THE_ELDIEME_NECROPOLIS]
 local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
+
+    -- Give the Acting in Good Faith ??? a random spawn
+    local qm1 = GetNPCByID(eldiemeID.npc.QM1)
+    qm1:setPos(unpack(eldiemeID.npc.QM1_POS[math.random(1, 4)]))
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
