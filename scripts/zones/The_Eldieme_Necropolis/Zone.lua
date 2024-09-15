@@ -6,6 +6,9 @@ local zoneObject = {}
 
 zoneObject.onInitialize = function(zone)
     xi.treasure.initZone(zone)
+
+    SetServerVariable('[Escort]Cannau', 0) -- Set escort for hire servervariable to 0
+    zone:registerTriggerArea(1, 420, 10, -120, 0, 0, 0) -- Escort for Hire
 end
 
 zoneObject.onZoneIn = function(player, prevZone)
